@@ -1,0 +1,7 @@
+appport = "8080"
+datadir = "data/"
+clientId = "d296a157e833b3913ad8"
+clientSecret = "7b97af3ac582b555e4ca46ed12f138dbde739324"
+authUrl = "https://github.com/login/oauth/authorize"
+tokenUrl = "https://github.com/login/oauth/access_token"
+clientRedirectUrl = "http://localhost:3030/#/repos"
