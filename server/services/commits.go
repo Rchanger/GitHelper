@@ -3,7 +3,6 @@ package services
 import (
 	"GitHelper/server/models"
 	"context"
-	"fmt"
 	"time"
 
 	"github.com/google/go-github/github"
@@ -46,26 +45,22 @@ func (ds DS) CreatePushCommit(ctx context.Context, params models.CommitSubmitPar
 	params.CommitDateTime = time.Now()
 	branchRef, err := ds.FetchBranchRef(ctx, params.Author, params.Repo, models.HeadRef+params.Branch)
 	if err != nil {
-		fmt.Println("FetchBranchRef", err)
 		return err
 	}
 	tree, err := ds.CreateNewBranchTree(ctx, params.Author, params.Repo, branchRef, params.Files)
 	if err != nil {
-		fmt.Println("CreateNewBranchTree", err)
 		return err
 	}
 	params.Tree = tree
 
 	parentCommit, err := ds.FetchCommit(ctx, params.Author, params.Repo, branchRef)
 	if err != nil {
-		fmt.Println("FetchCommit", err)
 		return err
 	}
 	params.ParentCommit = parentCommit
 
 	newCommit, err := ds.CreateNewCommit(ctx, params)
 	if err != nil {
-		fmt.Println("CreateNewCommit", err)
 		return err
 	}
 
@@ -73,7 +68,6 @@ func (ds DS) CreatePushCommit(ctx context.Context, params models.CommitSubmitPar
 
 	err = ds.AttachCommitToRef(ctx, params.Author, params.Repo, branchRef, false)
 	if err != nil {
-		fmt.Println("AttachCommitToRef", err)
 		return err
 	}
 

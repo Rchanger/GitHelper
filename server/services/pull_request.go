@@ -3,7 +3,6 @@ package services
 import (
 	"GitHelper/server/models"
 	"context"
-	"fmt"
 
 	"github.com/google/go-github/github"
 )
@@ -19,7 +18,6 @@ func (ds DS) NewPullRequest(ctx context.Context, params models.PullRequestSubmit
 
 	newPR, _, err := ds.GitPullRequestDS.Create(ctx, params.Author, params.Repo, prParms)
 	if err != nil {
-		fmt.Println("GitPullRequestDS", err)
 		return nil, err
 	}
 
