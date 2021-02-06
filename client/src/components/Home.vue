@@ -2,10 +2,7 @@
   <div class="hello">
     <ul>
       <li>
-        <a
-          href="http://localhost:8080/auth"
-          target="_self"
-        >
+        <a href="http://localhost:8080/auth" target="_self">
           Login with github
         </a>
       </li>
@@ -15,17 +12,17 @@
 
 <script>
 export default {
-  name: 'Home',
-  data () {
-    return {
-    }
+  name: "Home",
+  data() {
+    return {};
   }
-}
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h1, h2 {
+h1,
+h2 {
   font-weight: normal;
 }
 ul {
