@@ -1,39 +1,39 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import Home from '@/components/Home'
-import Repository from '@/components/Repository'
-import Branch from '@/components/Branch'
-import CommitForm from '@/components/CommitForm'
-import PullRequestForm from '@/components/PullRequestForm'
+import Vue from "vue";
+import Router from "vue-router";
+import Home from "@/components/Home";
+import Repository from "@/components/Repository";
+import Branch from "@/components/Branch";
+import CommitForm from "@/components/CommitForm";
+import PullRequestForm from "@/components/PullRequestForm";
 
-Vue.use(Router)
+Vue.use(Router);
 
 export default new Router({
   routes: [
     {
-      path: '/',
-      name: 'Home',
+      path: "/",
+      name: "Home",
       component: Home
     },
     {
-      path: '/repos',
-      name: 'Repository',
+      path: "/repos",
+      name: "Repository",
       component: Repository
     },
     {
-      path: '/branch/:repo',
-      name: 'Branch',
+      path: "/branch/:repo",
+      name: "Branch",
       component: Branch
     },
     {
-      path: '/commit',
-      name: 'CommitForm',
+      path: "/commit",
+      name: "CommitForm",
       component: CommitForm
     },
     {
-      path: '/pullRequest',
-      name: 'PullRequestForm',
+      path: "/pullRequest",
+      name: "PullRequestForm",
       component: PullRequestForm
     }
   ]
-})
+});
