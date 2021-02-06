@@ -7,10 +7,6 @@
 </template>
 
 <script>
-import Vue from 'vue'
-import axios from 'axios'
-import VueAxios from 'vue-axios'
-Vue.use(VueAxios, axios)
 export default {
   name: 'CommitForm',
   data () {
@@ -30,12 +26,18 @@ export default {
         var files = []
         files.push(this.file)
         var request = {"repo":this.repo, "branch": this.branch,"commit_message":this.message,"files":files}
-        Vue.axios.post("http://localhost:8080/commit", request).then((response) => {
+        axios.post("/server/commit", request).then((response) => {
           alert("Successful commit")
-          this.message = ""
-          this.file = ""
-          this.$router.push({name:'Branch', params:{repo:this.repo}})
+          this.redirect()
+        }).catch(err => {
+          console.error(err)
+          this.redirect()
         })
+      },
+      redirect() {
+        this.message = ""
+        this.file = ""
+        this.$router.push({name:'Branch', params:{repo:this.repo}})
       }
   }
 }

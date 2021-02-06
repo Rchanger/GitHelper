@@ -7,10 +7,6 @@
 </template>
 
 <script>
-import Vue from 'vue'
-import axios from 'axios'
-import VueAxios from 'vue-axios'
-Vue.use(VueAxios, axios)
 export default {
   name: 'PullRequestForm',
   data () {
@@ -30,12 +26,18 @@ export default {
         var files = []
         files.push(this.file)
         var request = {"repo":this.repo, "new_branch": this.branch, "description":this.description,"title":this.title}
-        Vue.axios.post("http://localhost:8080/pullRequest", request).then((response) => {
-          alert("Successfully created pull request")
-          this.title = ""
-          this.description = ""
-          this.$router.push({name:'Branch', params:{repo:this.repo}})
+        axios.post("/server/pullRequest", request).then((response) => {
+          alert("Successfully created pull request")  
+          this.redirect()
+        }).catch(err=> {
+          console.error(err)
+          this.redirect()
         })
+      },
+      redirect() {
+        this.title = ""
+        this.description = ""
+        this.$router.push({name:'Branch', params:{repo:this.repo}})
       }
   }
 }

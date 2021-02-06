@@ -20,10 +20,6 @@
 </template>
 
 <script>
-import Vue from 'vue'
-import axios from 'axios'
-import VueAxios from 'vue-axios'
-Vue.use(VueAxios, axios)
 export default {
   name: 'Repository',
   data () {
@@ -32,9 +28,9 @@ export default {
     }
   },
   mounted() {
-    Vue.axios.get("http://localhost:8080/repos").then((response) => {
+    axios.get("/server/repos").then((response) => {
     this.repos = response.data
-})
+    }).catch(err=>console.error(err))
   },
   methods: {
     View(repo) {
@@ -45,11 +41,8 @@ export default {
 </script>
 
 <style scoped>
-table {
 th, td {
   padding: 15px;
   text-align: left;
-}
-
 }
 </style>

@@ -6,7 +6,7 @@
   <input v-model="branch" placeholder="branch">
   <button @click=createBranch> Create New Branch </button>
 </div>
- <h2>Repos</h2>
+ <h2>Branches</h2>
 <table style="width:100%">
   <tr>
     <th>Name</th>
@@ -25,10 +25,6 @@
 </template>
 
 <script>
-import Vue from 'vue'
-import axios from 'axios'
-import VueAxios from 'vue-axios'
-Vue.use(VueAxios, axios)
 export default {
   name: 'Branch',
   data () {
@@ -45,16 +41,21 @@ export default {
   },
   methods: {
     getBranches() {
-      Vue.axios.get("http://localhost:8080/repos/"+ this.repo +"/branches").then((response) => {
-      this.branches = response.data})
+      axios.get("/server/repos/"+ this.repo +"/branches").then((response) => {
+      this.branches = response.data}).catch(err => {
+            console.log(err)
+        }).catch(err=> console.error(err))
     },
     createBranch() {
       if (this.branch != "" && this.checkBranchUnique()) {
        var request = {"repo":this.repo, "new_branch": this.branch}
-       Vue.axios.post("http://localhost:8080/branch", request).then((response) => {
+       axios.post("/server/branch", request).then((response) => {
          this.branch = ""
          this.getBranches()
-        }) 
+        }).catch(err=> {
+          console.error(err)
+          this.branch = ""
+          })
       } else {
         this.branch = ""
         console.log("Please provide unique branch name")
@@ -81,11 +82,8 @@ export default {
 </script>
 
 <style scoped>
-table {
 th, td {
   padding: 15px;
   text-align: left;
-}
-
 }
 </style>
